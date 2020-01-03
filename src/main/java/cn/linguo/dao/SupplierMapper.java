@@ -7,6 +7,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface SupplierMapper {
+
+
     int countByExample(SupplierExample example);
 
     int deleteByExample(SupplierExample example);
@@ -28,4 +30,6 @@ public interface SupplierMapper {
     int updateByPrimaryKeySelective(Supplier record);
 
     int updateByPrimaryKey(Supplier record);
+
+
 }

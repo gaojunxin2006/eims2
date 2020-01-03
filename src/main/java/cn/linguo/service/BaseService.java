@@ -7,7 +7,7 @@ import java.util.List;
 public interface BaseService<T> {
 
 	//添加一条记录
-		public int insert(T entity);
+		public int insert(T entity) throws Exception;
 		//根据主键修改记录
 		public int updateByPK(T entity);
 		//删除一条记录
