@@ -58,6 +58,21 @@ public class Supplier {
     }
 
     public void setSupRemark(String supRemark) {
+
+
         this.supRemark = supRemark == null ? null : supRemark.trim();
+    }
+
+
+    @Override
+    public String toString() {
+        return "Supplier{" +
+                "supId=" + supId +
+                ", supName='" + supName + '\'' +
+                ", supLinkman='" + supLinkman + '\'' +
+                ", supPhone='" + supPhone + '\'' +
+                ", supAddress='" + supAddress + '\'' +
+                ", supRemark='" + supRemark + '\'' +
+                '}';
     }
 }

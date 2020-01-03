@@ -17,6 +17,7 @@
                     <include>**/*.properties</include>
                     <include>**/*.xml</include>
                     <include>**/*.ftl</include>
+                    <include>**/*.jsp</include>
                 </includes>
                 <filtering>false</filtering>
             </resource>
