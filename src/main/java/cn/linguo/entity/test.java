@@ -11,6 +11,7 @@ public class test {
 
     private String good;
 
+    private String username;
 
 
 
