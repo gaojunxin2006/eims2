@@ -12,6 +12,14 @@ public class test {
     private String good;
 
 
+    public static void main(String[] args) {
+
+
+        System.out.println("你是一条色狼！");
+
+
+    }
+
 
 
 }
