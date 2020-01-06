@@ -20,6 +20,7 @@ public class SupplierServiceImpl implements SupplierService {
 
 	public int insert(Supplier entity) {
 		// TODO Auto-generated method stub
+		System.out.println("SupplierServiceImpl \t插入的对象是："+entity);
 		return supplierMapper.insert(entity);
 	}
 
@@ -42,7 +43,12 @@ public class SupplierServiceImpl implements SupplierService {
 	}
 
 
-	
 
 
+	public void insertSelective(Supplier entity) throws Exception {
+
+		System.out.println("SupplierServiceImpl \t插入的对象是："+entity);
+		supplierMapper.insertSelective(entity);
+
+	}
 }

@@ -31,5 +31,9 @@ public interface SupplierMapper {
 
     int updateByPrimaryKey(Supplier record);
 
+    int insert2(Supplier entity);
+
+
+
 
 }

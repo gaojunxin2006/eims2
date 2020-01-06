@@ -17,12 +17,15 @@ public class SupplierAction extends BaseAction {
 	@RequestMapping(value="/insert")
 	public String insert(Supplier supplier){
 		System.out.println("这个方法执行了。。。。\t:"+supplier);
-//		try {
-//			supplierService.insert(supplier);
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		try {
+
+			System.out.println("SupplierAction \t准备向数据库插入数据。。。。。。。");
+			supplierService.insertSelective(supplier);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "forward:/jsp/main.jsp";
 //		return "forward:/main.jsp";
 	}
