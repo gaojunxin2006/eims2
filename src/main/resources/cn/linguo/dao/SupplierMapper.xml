@@ -127,6 +127,53 @@
 
 
 
+  <!-- 抽取出来的抽象插入方法 -->
+
+  <insert id="insertSelective3" parameterType="cn.linguo.entity.Supplier" >
+    insert into supplier
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="supId != null" >
+        sup_id,
+      </if>
+      <if test="supName != null" >
+        sup_name,
+      </if>
+      <if test="supLinkman != null" >
+        sup_linkman,
+      </if>
+      <if test="supPhone != null" >
+        sup_phone,
+      </if>
+      <if test="supAddress != null" >
+        sup_address,
+      </if>
+      <if test="supRemark != null" >
+        sup_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="supId != null" >
+        #{supId,jdbcType=INTEGER},
+      </if>
+      <if test="supName != null" >
+        #{supName,jdbcType=VARCHAR},
+      </if>
+      <if test="supLinkman != null" >
+        #{supLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="supPhone != null" >
+        #{supPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="supAddress != null" >
+        #{supAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="supRemark != null" >
+        #{supRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+
 
 
 

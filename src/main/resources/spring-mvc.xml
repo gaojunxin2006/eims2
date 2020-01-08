@@ -15,10 +15,10 @@
 
 	<!-- 扫描所有的controller 但是不扫描service -->
 	<context:component-scan base-package="cn.linguo.*">
-<!--		<context:include-filter type="annotation"-->
-<!--			expression="org.springframework.stereotype.Controller" />-->
-<!--		<context:exclude-filter type="annotation"-->
-<!--			expression="org.springframework.stereotype.Service" />-->
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Service" />
 	</context:component-scan>
 	
 </beans>

@@ -40,4 +40,16 @@ public class Account {
     public void setAccPass(String accPass) {
         this.accPass = accPass == null ? null : accPass.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "accId=" + accId +
+                ", accLogin='" + accLogin + '\'' +
+                ", accName='" + accName + '\'' +
+                ", accPass='" + accPass + '\'' +
+                '}';
+    }
+
+
 }

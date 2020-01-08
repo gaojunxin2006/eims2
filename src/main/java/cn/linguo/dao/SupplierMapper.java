@@ -6,7 +6,7 @@ import cn.linguo.entity.SupplierExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface SupplierMapper {
+public interface SupplierMapper extends BaseMapper<Supplier> {
 
 
     int countByExample(SupplierExample example);

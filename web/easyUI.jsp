@@ -31,6 +31,9 @@ $(function(){alert("可以使用了!");});
 	<div id="p" class="easyui-panel" style="width:500px;height:200px;padding:10px;"   
         title="My Panel" iconCls="icon-save" collapsible="true">   
     test my panel    
-</div> 
+</div>
+
+
+
 </body>
 </html>

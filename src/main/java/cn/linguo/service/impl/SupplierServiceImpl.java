@@ -44,11 +44,19 @@ public class SupplierServiceImpl implements SupplierService {
 
 
 
+	public void insertSelective3(Supplier entity) throws Exception {
 
-	public void insertSelective(Supplier entity) throws Exception {
+		//抽取出来的方法
 
 		System.out.println("SupplierServiceImpl \t插入的对象是："+entity);
-		supplierMapper.insertSelective(entity);
+		supplierMapper.insertSelective3(entity);
+
+	}
+
+
+
+
+	public void insertSelective(Supplier entity) throws Exception {
 
 	}
 }

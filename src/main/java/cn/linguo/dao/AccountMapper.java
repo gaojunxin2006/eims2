@@ -6,7 +6,7 @@ import cn.linguo.entity.AccountExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface AccountMapper {
+public interface AccountMapper extends BaseMapper<Account> {
     int countByExample(AccountExample example);
 
     int deleteByExample(AccountExample example);
@@ -28,4 +28,12 @@ public interface AccountMapper {
     int updateByPrimaryKeySelective(Account record);
 
     int updateByPrimaryKey(Account record);
+
+
+    //用户登陆方法
+    Account login(Account account);
+
+
+
+
 }
