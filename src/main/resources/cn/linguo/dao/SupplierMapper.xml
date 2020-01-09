@@ -99,10 +99,17 @@
   </select>
 
 
+
+  <!-- 根据id删除 -->
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from supplier
     where sup_id = #{supId,jdbcType=INTEGER}
   </delete>
+
+
+
+
 
 
   <delete id="deleteByExample" parameterType="cn.linguo.entity.SupplierExample" >
@@ -307,9 +314,125 @@
   </update>
 
 
-  <insert id="insert2" parameterType="supplier">
-  	insert into supplier(sup_name,sup_address) values(#{supName},#{supAddress})
-  </insert>
+
+  <!-- 测试插入数据 -->
+<!--  <insert id="insert2" parameterType="supplier">-->
+<!--  	insert into supplier(sup_name,sup_address) values(#{supName},#{supAddress})-->
+<!--  </insert>-->
+
+
+
+
+
+  <!-- 通过关键字，查询分页数据,拆成2条 -->
+<select id="pageSelectList" parameterType="cn.linguo.entity.Page" resultMap="BaseResultMap">
+
+  select * from supplier
+
+  <if test="keyWord !=null and keyWord !=''">
+   where sup_name like #{keyWord}
+  </if>
+
+      limit #{start},#{rows}
+
+
+
+<!--  where sup_name like #{keyWord} -->
+
+
+
+
+</select>
+
+
+
+  <!-- 通过关键字，查询总记录数 -->
+
+  <select id="pageCount" parameterType="cn.linguo.entity.Page" resultType="integer">
+
+    select count(0)  from supplier
+    <if test="keyWord !=null and keyWord !=''">
+
+      where sup_name like #{keyWord}
+
+    </if>
+
+
+
+  </select>
+
+
+
+
+  <!-- 多条件关键字，查询分页数据,拆成2条 -->
+  <select id="SelectListPage" parameterType="cn.linguo.entity.Page" resultMap="BaseResultMap">
+
+    select * from supplier
+
+    <where>
+
+      <if test="paramEntity.supName !=null and paramEntity.supName !=''">
+        sup_name like #{paramEntity.supName}
+      </if>
+
+      <if test="paramEntity.supAddress !=null and paramEntity.supAddress !=''">
+       and sup_address like #{paramEntity.supAddress}
+      </if>
+
+    </where>
+
+
+
+    limit #{start},#{rows}
+
+
+
+  </select>
+
+
+  <!-- 多条件通过关键字，查询总记录数 -->
+
+  <select id="CountPage" parameterType="cn.linguo.entity.Page" resultType="integer">
+
+    select count(0)  from supplier
+      <where>
+
+        <if test="keyWord !=null and keyWord !=''">
+          sup_name like #{keyWord}
+        </if>
+
+        <if test="paramEntity.supAddress !=null and paramEntity.supAddress !=''">
+          and sup_address like #{paramEntity.supAddress}
+        </if>
+
+      </where>
+
+
+  </select>
+
+
+
+
+  <!-- 根据id删除批量删除,传进来的十个数组 -->
+
+  <delete id="deleteList" >
+
+    delete from supplier where sup_id in
+
+    <foreach collection="array" item="dept" open="(" close=")" separator=",">
+
+      #{dept}
+
+
+    </foreach>
+
+
+
+  </delete>
+
+
+
+
 
 
 

@@ -2,6 +2,7 @@ package cn.linguo.service.impl;
 
 import cn.linguo.dao.AccountMapper;
 import cn.linguo.entity.Account;
+import cn.linguo.entity.Page;
 import cn.linguo.entity.Supplier;
 import cn.linguo.service.AccountService2020;
 import org.apache.poi.hssf.record.formula.functions.T;
@@ -73,6 +74,30 @@ public class AccountService2020Impl implements AccountService2020 {
         return 0;
     }
 
+    public List<T> pageSelectList(Page<T> page) {
+        return null;
+    }
+
+    public Integer pageCount(Page<T> page) {
+        return null;
+    }
+
+    public List<T> SelectListPage(Page<T> page) {
+        return null;
+    }
+
+    public Integer CountPage(Page<T> page) {
+        return null;
+    }
+
+
+
+
+
+    //通用 根据主键批量删除多条记录
+    public Integer deleteList(String[] pks) {
+        return null;
+    }
 
 
 }

@@ -24,6 +24,13 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+
+
+
+
+
+
+
     <servlet-mapping>
         <servlet-name>mvc</servlet-name>
         <url-pattern>*.action</url-pattern>
@@ -50,6 +57,21 @@
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+
+    <!-- servlet 启动加载 -->
+
+    <servlet>
+        <servlet-name>SysParamServlet</servlet-name>
+        <servlet-class>cn.linguo.servlets.SysParamServlet</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+
+    
+    <servlet-mapping>
+        <servlet-name>SysParamServlet</servlet-name>
+        <url-pattern>/sysParamServlet</url-pattern>
+    </servlet-mapping>
 
 
 </web-app>

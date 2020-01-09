@@ -5,7 +5,11 @@ import cn.linguo.entity.Supplier;
 
 public interface SupplierService extends BaseService<Supplier> {
 
-	  void insertSelective(Supplier entity) throws Exception;
+	//插入供应商数据
+	void insertSelective(Supplier entity) throws Exception;
+
+
+
 
 
 
