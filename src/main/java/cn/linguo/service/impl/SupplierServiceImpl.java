@@ -29,7 +29,10 @@ public class SupplierServiceImpl implements SupplierService {
 
 	public int updateByPK(Supplier entity) {
 		// TODO Auto-generated method stub
-		return 0;
+
+		System.out.println("SupplierServiceImpl \t修改供应商资料："+entity);
+
+		return supplierMapper.updateByPrimaryKeySelective(entity);
 	}
 
 

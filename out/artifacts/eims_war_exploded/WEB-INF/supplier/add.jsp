@@ -37,6 +37,10 @@
                                                     name="supLinkman" />
     </div>
     <div>
+        <label>地址:</label> <input type="text"
+                                                   name="supAddress" />
+    </div>
+    <div>
         <label for="supPhone">联系电话:</label> <input type="text"
                                                    name="supPhone" />
     </div>

@@ -28,7 +28,7 @@ public interface BaseMapper<T> {
 
 
     //根据主键修改记录
-    public int update3(T entity);
+    public int updateByPrimaryKeySelective(T entity);
 
 
     //查找记录

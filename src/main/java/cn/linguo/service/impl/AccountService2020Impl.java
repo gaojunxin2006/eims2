@@ -47,7 +47,9 @@ public class AccountService2020Impl implements AccountService2020 {
         return 0;
     }
 
-
+    public int updateByPrimaryKeySelective(T entity) {
+        return 0;
+    }
 
 
     public int update3(T entity) {

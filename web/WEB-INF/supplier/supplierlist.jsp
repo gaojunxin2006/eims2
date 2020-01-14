@@ -75,6 +75,7 @@
 
                             parent.$('#win').window({
 
+                                title:'添加供应商',
                                 width:600,
                                 height:400,
                                 modal:true,
@@ -93,7 +94,32 @@
                     iconCls: 'icon-edit',
                         text:'编辑',
                     handler: function () {
-                        alert('编辑按钮')
+
+                       //获取选中的行
+                       var rows=$('#dg').datagrid('getSelections');
+
+                        if (rows.length!=1){
+
+                            alert("请选择,并且只能选择一条修改记录！");
+
+                            return false;
+                        }
+                        parent.$('#win').window({
+
+                            title:'修改供应商',
+                            width:600,
+                            height: 400,
+                            modal: true,
+                            content:"<iframe src='${proPath}/base/goURL/supplier/edit.action' title='编辑供应商' height='100%' width='100%' frameborder='0px' ></iframe>"
+
+
+
+
+                        })
+
+
+
+
                         }
                     },
 

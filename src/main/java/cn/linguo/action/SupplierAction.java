@@ -150,6 +150,27 @@ public class SupplierAction extends BaseAction {
 	}
 
 
+	//修改供应商资料
+	@RequestMapping(value="/update")
+	@ResponseBody
+	public Object update(Supplier supplier){
+		System.out.println("SupplierAction 更新供应商资料这个方法执行了。。。。\t:"+supplier);
+		int i=0;
+		try {
+
+
+			i=supplierService.updateByPK(supplier);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return i;
+
+
+	}
+
 
 
 

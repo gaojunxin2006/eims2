@@ -107,8 +107,8 @@
         <div title="进货管理">
             <!-- list-style: none去左边的点；text-decoration: none：去超链接下划线,title用来区分后继定位这里的超链接 -->
             <ul style="list-style: none;padding: 0px;margin:0px;">
-                <li style="padding: 6px;"><a href="#" title="商品进货"
-                                             style="text-decoration: none;display: block;font-weight:bold;">商品进货</a>
+                <li style="padding: 6px;"><a href="${proPath}/base/goURL/buyorder/insertView.do" title="商品入库"
+                                             style="text-decoration: none;display: block;font-weight:bold;">商品入库</a>
                 </li>
                 <li style="padding: 6px;"><a href="#" title="商品退货"
                                              style="text-decoration: none;display: block;font-weight:bold;" >商品管理</a>
