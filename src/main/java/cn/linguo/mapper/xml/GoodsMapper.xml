@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.linguo.mapper.GoodsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.linguo.entity.Goods">
+        <id column="goods_Id" property="goodsId" />
+        <result column="goods_name" property="goodsName" />
+        <result column="goods_unit" property="goodsUnit" />
+        <result column="goods_type" property="goodsType" />
+        <result column="goods_color" property="goodsColor" />
+        <result column="goods_store" property="goodsStore" />
+        <result column="goods_limit" property="goodsLimit" />
+        <result column="goods_commission" property="goodsCommission" />
+        <result column="goods_producer" property="goodsProducer" />
+        <result column="goods_remark" property="goodsRemark" />
+        <result column="goods_sel_price" property="goodsSelPrice" />
+        <result column="goods_buy_price" property="goodsBuyPrice" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        goods_Id, goods_name, goods_unit, goods_type, goods_color, goods_store, goods_limit, goods_commission, goods_producer, goods_remark, goods_sel_price, goods_buy_price
+    </sql>
+
+</mapper>

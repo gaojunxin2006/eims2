@@ -25,13 +25,16 @@
 
 
 
-	<!-- 配置session工厂 -->
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<!-- 配置session工厂 org.mybatis.spring.SqlSessionFactoryBean ，
+	这个是用的mybatis整合spring。 如果使用MybatisPlus,修改这里 com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean-->
+
+	<bean id="sqlSessionFactoryBean" class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="configLocation" value="classpath:myBatis-config.xml"></property>
 
 		<!--配置扫描式加载SQL映射文件,记得去掉mybatis-config配置-->
-		<property name="mapperLocations" value="classpath:cn/linguo/dao/*.xml"/>
+		<property name="mapperLocations" value="classpath:cn/linguo/*/*.xml"/>
+		<property name="typeAliasesPackage" value="cn.linguo.entity"></property>
 
 	</bean>
 
@@ -95,26 +98,37 @@
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 
-		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
-		<property name="basePackage" value="cn.linguo.dao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"></property>
+		<property name="basePackage" value="cn.linguo.dao,cn.linguo.mapper"></property>
 
 	</bean>
-	
-	
+
+
 
 
 
 	<!-- 配置SessionTemplate，已封装了繁琐的数据操作-->
-	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+<!--	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">-->
+<!--		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>-->
 
 
-	</bean>
+<!--	</bean>-->
 
 
 
 
 	
 	<!-- <context:component-scan base-package="*"/> -->
-		
+
+
+
+
+
+
+
+	<!-- 定义MybatisPlus的全局策略配置-->
+
+
+
+
 </beans>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.linguo.mapper.BuyOrderDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.linguo.entity.BuyOrderDetail">
+        <id column="bod_id" property="bodId" />
+        <result column="goods_id" property="goodsId" />
+        <result column="goods_name" property="goodsName" />
+        <result column="goods_unit" property="goodsUnit" />
+        <result column="goods_type" property="goodsType" />
+        <result column="goods_color" property="goodsColor" />
+        <result column="bod_amount" property="bodAmount" />
+        <result column="bod_buy_price" property="bodBuyPrice" />
+        <result column="bod_total_price" property="bodTotalPrice" />
+        <result column="bo_id" property="boId" />
+        <result column="bod_imei_list" property="bodImeiList" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        bod_id, goods_id, goods_name, goods_unit, goods_type, goods_color, bod_amount, bod_buy_price, bod_total_price, bo_id, bod_imei_list
+    </sql>
+
+</mapper>
