@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.linguo.mapper.MpMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.linguo.entity.Mp">
+        <id column="user_Id" property="userId" />
+        <result column="user_name" property="studentName" />
+        <result column="age" property="age" />
+        <result column="email" property="email" />
+        <result column="manager_id" property="managerId" />
+        <result column="create_time" property="createTime" />
+
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+      user_Id,user_name,age,email,manager_id,create_time
+    </sql>
+
+
+    <!-- 自定义查询 -->
+    <select id="selectAll3"  resultType="cn.linguo.entity.Mp">
+
+        select * from lg_mp ${ew.customSqlSegment}
+
+
+    </select>
+
+
+
+    <!-- 自定义查询4 -->
+    <select id="selectAll4"  resultType="cn.linguo.entity.Mp">
+
+        select * from lg_mp
+
+
+    </select>
+
+
+    <!-- 自定义查询5 -->
+    <select id="selectAll5"  parameterType="long" resultType="cn.linguo.entity.Mp">
+
+        select * from lg_mp where user_id=#{userId}
+
+
+    </select>
+
+
+</mapper>

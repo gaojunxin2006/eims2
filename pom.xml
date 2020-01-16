@@ -614,7 +614,8 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.18</version>
+<!--            <version>5.1.18</version>-->
+            <version>5.1.48</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
@@ -700,7 +701,7 @@
         </dependency>
 
 
-
+        <!-- ===================================================================== -->
 
 
         <!-- activiti依赖 -->
@@ -1002,7 +1003,7 @@
         </dependency>
 
 
-        <!-- ============================mybatis-plus逆向生成工具================================================ -->
+        <!-- ============================mybatis-plus================================================ -->
 
         <dependency>
             <groupId>com.baomidou</groupId>
@@ -1025,6 +1026,7 @@
 
 
 
+z
         <!--添加 代码生成器 依赖-->
         <dependency>
             <groupId>com.baomidou</groupId>

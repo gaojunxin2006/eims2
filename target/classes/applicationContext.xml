@@ -40,6 +40,15 @@
 		<!-- 注入全局配置 -->
 		<property name="globalConfig" ref="globalConfig"/>
 
+		<!-- 分页插件 -->
+		<property name="plugins">
+			<array>
+				<bean id="paginationInterceptor" class="com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor"></bean>
+
+			</array>
+
+
+		</property>
 
 	</bean>
 
@@ -68,8 +77,23 @@
 
 
 
+	<!-- 配置 转换器，对于在basePackage设置的包（包括子包）下的接口类 的全类名，如果在Mapper.xml文件中定义过命名空间，
+将被转换成spring的BEAN，在调用 的地方通过@Autowired方式将可以注入接口实例-->
 
-	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+
+		<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"></property>
+		<property name="basePackage" value="cn.linguo.dao,cn.linguo.mapper"></property>
+
+	</bean>
+
+
+
+
+
+
+
+
 	<!-- 配置事务管理器,管理数据源事务处理-->
 	<bean id="tr" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
@@ -123,16 +147,6 @@
 
 
 	
-		<!-- 配置 转换器，对于在basePackage设置的包（包括子包）下的接口类 的全类名，如果在Mapper.xml文件中定义过命名空间，
-	将被转换成spring的BEAN，在调用 的地方通过@Autowired方式将可以注入接口实例-->
-
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-
-		<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"></property>
-		<property name="basePackage" value="cn.linguo.dao,cn.linguo.mapper"></property>
-
-	</bean>
-
 
 
 
@@ -152,11 +166,6 @@
 
 
 
-
-
-
-
-	<!-- 定义MybatisPlus的全局策略配置-->
 
 
 

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.linguo.mapper.ReturnOrderDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.linguo.entity.ReturnOrderDetail">
+        <id column="rod_id" property="rodId" />
+        <result column="goods_id" property="goodsId" />
+        <result column="goods_unit" property="goodsUnit" />
+        <result column="goods_name" property="goodsName" />
+        <result column="goods_type" property="goodsType" />
+        <result column="goods_color" property="goodsColor" />
+        <result column="rod_amount" property="rodAmount" />
+        <result column="rod_return_price" property="rodReturnPrice" />
+        <result column="rod_total_price" property="rodTotalPrice" />
+        <result column="rod_imei_list" property="rodImeiList" />
+        <result column="ro_id" property="roId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        rod_id, goods_id, goods_unit, goods_name, goods_type, goods_color, rod_amount, rod_return_price, rod_total_price, rod_imei_list, ro_id
+    </sql>
+
+</mapper>

@@ -205,6 +205,8 @@ public class TestMP {
 
     }
 
+
+
     //使用条件构造器查询,多条件查询
     @Test
     public void selectByWrapper3() {
@@ -244,6 +246,13 @@ public class TestMP {
 
 
     }
+
+
+
+
+
+
+
 
 
 
