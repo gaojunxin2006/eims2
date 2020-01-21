@@ -16,17 +16,26 @@
 
 	
 	<!-- 配置数据源，记得去掉myBatis-config.xml的数据源相关配置 -->
+	<!--p6spy 慢sql -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
-		<property name="jdbcUrl" value="jdbc:mysql://192.168.0.242:3306/eims?useUnicode=true&amp;characterEncoding=UTF-8" />
-		<property name="user" value="wii" />
+				<property name="jdbcUrl" value="jdbc:mysql://192.168.0.242:3306/eims?useUnicode=true&amp;characterEncoding=UTF-8" />
+<!--		<property name="driverClass" value="com.p6spy.engine.spy.P6SpyDriver"/>-->
+
+<!--<property name="jdbcUrl" value="jdbc:p6spy:mysql://192.168.0.242:3306/eims?useUnicode=true&amp;characterEncoding=UTF-8"/>-->
+ 		<property name="user" value="wii" />
 		<property name="password" value="69658757" />
 	</bean>
 
 
 
+
+
+
 	<!-- 配置session工厂 org.mybatis.spring.SqlSessionFactoryBean ，
 	这个是用的mybatis整合spring。 如果使用MybatisPlus,修改这里 com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean-->
+
+	<!-- 如果使用MybatisPlus 配置 -->
 
 	<bean id="sqlSessionFactoryBean" class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
@@ -40,15 +49,26 @@
 		<!-- 注入全局配置 -->
 		<property name="globalConfig" ref="globalConfig"/>
 
-		<!-- 分页插件 -->
+
+		<!-- 插件注册 -->
 		<property name="plugins">
+
 			<array>
+
+				<!-- 分页插件 -->
 				<bean id="paginationInterceptor" class="com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor"></bean>
+
+				<!-- 乐观锁插件 -->
+				<bean class="com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor"/>
+
 
 			</array>
 
 
+
 		</property>
+
+
 
 	</bean>
 
@@ -61,7 +81,12 @@
 
 		<property name="dbConfig" ref="dbConfig"></property>
 
+		<!-- 自动填充 -->
+		<property name="metaObjectHandler" ref="myMetaObjectHandler"/>
+
+
 	</bean>
+
 
 
 	<bean id="dbConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig.DbConfig">
@@ -69,10 +94,21 @@
 		<!-- 主键自动生成 -->
 		<property name="idType" value="AUTO"></property>
 
+		<!-- 逻辑未删除,这些值对应数据库的字段 -->
+		<property name="logicNotDeleteValue" value="0"/>
+
+		<!-- 逻辑已删除 -->
+		<property name="logicDeleteValue" value="1"/>
+
+
+
+
 		<!-- 表前缀 -->
 <!--		<property name="tablePrefix" value=""></property>-->
 
 	</bean>
+
+
 
 
 

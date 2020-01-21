@@ -40,11 +40,11 @@
 
 
     <distributionManagement>
-    <repository>
-        <id>linguo</id>
-        <name>linguo</name>
-        <url>http://file.linguo.cn:8081/repository/linguo/</url>
-    </repository>
+        <repository>
+            <id>linguo</id>
+            <name>linguo</name>
+            <url>http://file.linguo.cn:8081/repository/linguo/</url>
+        </repository>
     <!--        <snapshotRepository>-->
     <!--            <id>nexus-snapshots</id>-->
     <!--            <name>Nexus Snapshot Repository</name>-->
@@ -1026,14 +1026,15 @@
 
 
 
-z
+
         <!--添加 代码生成器 依赖-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
             <version>3.2.0</version>
         </dependency>
-        <!--模板引擎 freemarker    -->
+
+        <!--模板引擎 freemarker   -->
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
@@ -1056,6 +1057,7 @@ z
 <!--        </dependency>-->
 
 
+        <!-- 不需要写get set方法插件 -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -1064,11 +1066,15 @@ z
         </dependency>
 
 
+        <!-- sql性能分析 -->
+        <dependency>
+            <groupId>p6spy</groupId>
+            <artifactId>p6spy</artifactId>
+            <version>3.8.2</version>
+        </dependency>
 
 
-
-
-        <!-- ========================================================== -->
+        <!-- =====================测试包===================================== -->
 
          <dependency>
              <groupId>org.junit.jupiter</groupId>
@@ -1076,6 +1082,7 @@ z
              <version>RELEASE</version>
              <scope>compile</scope>
          </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

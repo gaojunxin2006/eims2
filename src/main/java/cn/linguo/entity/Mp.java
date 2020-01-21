@@ -1,8 +1,7 @@
 package cn.linguo.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -13,12 +12,20 @@ import java.time.LocalDateTime;
  * 微信：15000952623
  **/
 
-@Data
+//开发AR模式
+
+
+@Data   //通过他实现不写get set toString等方法
 @TableName("lg_mp")
-public class Mp {
+public class Mp extends Model<Mp> {
 
+    //自定义id
+    //@TableId(type = IdType.NONE)
 
-    @TableId
+    //IdType.Id_Auto是自增模式
+
+    //雪花算法
+    @TableId(type = IdType.ID_WORKER)
     private Long userId;
 
 
@@ -34,7 +41,8 @@ public class Mp {
 
     private Long managerId;
 
-
+    //创建时间，在新增的时候自动填充
+    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
 
@@ -45,6 +53,25 @@ public class Mp {
     //方法3 使用注解@TableField(exist = false) 表示不是数据库中的字段
     @TableField(exist = false)
     private String remark;
+
+
+
+    //修改时间.在更新时填充
+    @TableField(fill = FieldFill.UPDATE)
+    private LocalDateTime updateTime;
+
+
+    //版本 （0未删除，1已删除）
+    @TableLogic()
+    //sql语句不查询这个字段
+    @TableField(select = false)
+    private Integer deleted;
+
+
+    @Version
+    private Integer version;
+
+
 
 
 

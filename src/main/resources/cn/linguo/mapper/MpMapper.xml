@@ -47,4 +47,23 @@
     </select>
 
 
+
+    <!-- 自定义分页查询 ，直接在里面写多表查询语句即可-->
+    <select id="selectMpPage" resultType="mp">
+
+    select * from lg_mp ${ew.customSqlSegment}
+
+
+
+    </select>
+
+
+
+
+
+
+
+
+
+
 </mapper>

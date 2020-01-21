@@ -1,21 +1,26 @@
-package cn.linguo.test;
+package cn.linguo.test.mp;
 
 import cn.linguo.entity.Goods;
 import cn.linguo.entity.Mp;
 import cn.linguo.mapper.GoodsMapper;
 import cn.linguo.mapper.MpMapper;
+import cn.linguo.mapper.UserMapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.additional.update.impl.LambdaUpdateChainWrapper;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.transaction.event.TransactionalEventListener;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -32,7 +37,7 @@ import java.util.Map;
 
 
 
-public class SimplTest {
+public class SimplMpTest {
 
 
     private ApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -40,9 +45,7 @@ public class SimplTest {
 
     private MpMapper mpMapper  = ioc.getBean("mpMapper", MpMapper.class);
 
-    private GoodsMapper goodsMapper=ioc.getBean("goodsMapper", GoodsMapper.class);
-
-
+    //查询条件构造对象
     private QueryWrapper<Mp> queryWrapper=new QueryWrapper<>();
 
 
@@ -535,6 +538,10 @@ public void slectByWrapper10(){
 
 
 
+
+
+//-------------------------------------------------------------------------------------------------------
+
     //使用自定义方法
     @Test
     public void slectMy(){
@@ -602,14 +609,20 @@ public void slectByWrapper10(){
 
 
 
+//-------------------------------------------------------------------------------------------------------
+
 
     //分页查询
     @Test
     public void selectPage(){
 
 
+        //年龄小于26
+//        queryWrapper.lt("age",26);
 
-        queryWrapper.lt("age",26);
+        //年龄大于26
+        queryWrapper.ge("age",26);
+
         Page<Mp> page = new Page<>(1, 2);
 
         IPage<Mp> iPage = mpMapper.selectPage(page, queryWrapper);
@@ -623,6 +636,267 @@ public void slectByWrapper10(){
 
 
     }
+
+
+
+
+    //分页查询2
+    @Test
+    public void selectPage2() {
+
+        //年龄大于26
+        queryWrapper.ge("age",26);
+
+        Page<Mp> page = new Page<>(1, 2,false);
+
+        IPage<Map<String, Object>> mapIPage = mpMapper.selectMapsPage(page, queryWrapper);
+
+        System.out.println("总页数：\t"+mapIPage.getPages());
+        System.out.println("总记录数：\t"+mapIPage.getTotal());
+
+        List<Map<String, Object>> mpList = mapIPage.getRecords();
+
+        mpList.forEach(System.out::println);
+
+
+    }
+
+
+    //分页查询2
+    @Test
+    public void selectMyPage() {
+
+        //年龄大于26
+        queryWrapper.ge("age",26);
+
+        Page<Mp> page = new Page<>(1,2);
+
+        IPage<Mp> mpIPage = mpMapper.selectMpPage(page, queryWrapper);
+
+        System.out.println("总页数：\t"+mpIPage.getPages());
+        System.out.println("总记录数：\t"+mpIPage.getTotal());
+
+        List<Mp> records = mpIPage.getRecords();
+
+        records.forEach(System.out::println);
+
+
+    }
+
+
+
+
+    //-------------------------------------------------------------------------------------------------------
+    //更新
+
+   @Test
+   public void updateByids(){
+
+        Mp mp=new Mp();
+        mp.setUserId(1094592041087729676l);
+        mp.setAge(9);
+        mp.setEmail("wex@qq.com");
+
+
+       int i = mpMapper.updateById(mp);
+
+       System.out.println("共更新了\t"+i+"条记录");
+
+
+   }
+
+
+   @Test
+   public void updateByWrapper(){
+
+
+       UpdateWrapper<Mp> updateWrapper=new UpdateWrapper<>();
+
+       //设置查询的where条件
+       updateWrapper.eq("user_name","令狐冲").eq("age",27);
+
+       //更改令狐冲的邮箱
+       Mp mp=new Mp();
+       mp.setEmail("linghuchong@souhu.com");
+
+       mp.setAge(28);
+
+       int i = mpMapper.update(mp, updateWrapper);
+
+       System.out.println("共更新了\t"+i+"条记录");
+
+
+
+   }
+
+
+
+
+    @Test
+    public void updateByWrapper2(){
+
+        //更改令狐冲的邮箱
+        Mp whereM=new Mp();
+        whereM.setStudentName("令狐冲");
+
+
+
+        UpdateWrapper<Mp> updateWrapper=new UpdateWrapper<>();
+
+        //设置查询的where条件
+        updateWrapper.eq("age",27);
+
+
+        whereM.setAge(28);
+
+        int i = mpMapper.update(whereM, updateWrapper);
+
+        System.out.println("共更新了\t"+i+"条记录");
+
+
+
+    }
+
+
+
+
+    //只更新部分字段，不去new对象
+    @Test
+    public void updateByWrapper3(){
+
+        UpdateWrapper<Mp> updateWrapper=new UpdateWrapper<>();
+
+        //设置查询的where条件
+        updateWrapper.eq("user_name","令狐冲").eq("age",28).set("age",27);
+
+        //更改令狐冲的邮箱
+        Mp whereM=new Mp();
+
+
+        whereM.setAge(28);
+
+        int i = mpMapper.update(whereM, updateWrapper);
+
+        System.out.println("共更新了\t"+i+"条记录");
+
+
+
+    }
+
+
+
+    //只更新部分字段  Lambda有防止误写功能
+    @Test
+    public void updateByWrapperLambda(){
+
+        LambdaUpdateWrapper<Mp> lambdaQueryWrapper=Wrappers.<Mp>lambdaUpdate();
+
+        //设置查询的where条件
+        lambdaQueryWrapper.eq(Mp::getStudentName,"令狐冲").eq(Mp::getAge,27).set(Mp::getAge,31);
+
+        //更改令狐冲的邮箱
+        Mp whereM=new Mp();
+
+
+        whereM.setAge(28);
+
+        int i = mpMapper.update(whereM, lambdaQueryWrapper);
+
+        System.out.println("共更新了\t"+i+"条记录");
+
+
+
+    }
+
+
+
+
+
+    //只更新部分字段  Lambda有防止误写功能。链式
+    @Test
+    public void updateByWrapperLambda2(){
+
+        boolean reslt = new LambdaUpdateChainWrapper<Mp>(mpMapper).eq(Mp::getStudentName, "令狐冲").eq(Mp::getAge, 31).set(Mp::getAge, 27)
+                .update();
+
+
+       if (reslt){
+
+           System.out.println("共更新了\t1"+"条记录");
+       }
+
+
+
+
+    }
+
+
+
+//-------------------------------------------------------------------------------------------------------
+    //删除
+
+ @Test
+ public void deleteByid(){
+
+     int i = mpMapper.deleteById("1094592041087729667");
+
+     System.out.println("删除\t"+i+"条记录");
+
+ }
+
+
+
+ //map删除,map内容相当于where条件
+    @Test
+    public void deleteByMap(){
+
+
+        Map<String,Object> map=new HashMap<>();
+
+        map.put("user_name","郭德纲");
+
+        map.put("age","26");
+
+        int i = mpMapper.deleteByMap(map);
+
+        System.out.println("删除\t"+i+"条记录");
+
+    }
+
+
+    @Test
+    //批量删除
+    public void deleteBathids(){
+
+
+        int i = mpMapper.deleteBatchIds(Arrays.asList(1094592041087729671l, 1094592041087729676l));
+
+        System.out.println("删除\t"+i+"条记录");
+    }
+
+
+
+
+
+    @Test
+    //Lambda删除
+    public void deleteBathidsLambda(){
+
+        LambdaQueryWrapper<Mp> lambdaQueryWrapper=Wrappers.<Mp>lambdaQuery();
+
+        lambdaQueryWrapper.eq(Mp::getAge,21).or().gt(Mp::getAge,41);
+
+        int i = mpMapper.delete(lambdaQueryWrapper);
+
+
+        System.out.println("删除\t"+i+"条记录");
+
+
+    }
+
+
+
+
 
 
 
