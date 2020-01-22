@@ -6,7 +6,9 @@ import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -63,9 +65,7 @@ public class Goods implements Serializable {
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
-
-    private Integer manager;
-
+    private Integer managerId;
 
 
     //版本控制。乐观锁
@@ -73,16 +73,15 @@ public class Goods implements Serializable {
     private Integer version;
 
     @TableLogic()
-    //删除  版本 （0未删除，1已删除）
+    //删除标志 （0未删除，1已删除）
     private Integer deleted;
 
 
+    @TableField(exist = false)
+    private String createTimeString;
 
 
-
-
-
-
-
-
+    public String getCreateTimeString() {
+        return (createTime.toString()).substring(0,createTime.toString().indexOf("T"));
+    }
 }

@@ -12,6 +12,16 @@
 
     <script type="text/javascript">
 
+
+
+        function formatterdate(val, row) {
+            if (val==null)
+                return '';
+            var format = 'yyyy-MM-dd hh:mm';
+            var d = new Date(val.time);
+            return d.format(format);
+        };
+
         $(function () {
 
             $("#dg").datagrid({
@@ -246,7 +256,7 @@
                     {field:'goodsStore',title:'仓库',width:100},
                     {field:'goodsSelPrice',title:'价格',width:100},
                     {field:'goodsRemark',title:'备注',width:100},
-                    {field:'createTime',title:'添加时间',width:100}
+                    {field:'createTimeString',title:'添加时间',width:100}
 
                 ]]
 
@@ -288,7 +298,6 @@
 
 
 
-
     </script>
 
 
@@ -300,7 +309,7 @@
 
 <body>
 
-    供应商明细页面
+    商品管理明细页面
 
     <table id="dg">
 

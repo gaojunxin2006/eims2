@@ -50,6 +50,7 @@ private IGoodsService goodsService;
 
         Page<Goods> page2=new Page<>();
         page2.setPageList(records);
+        page2.setTotalRecord(new Long(iPageList.getTotal()).intValue());
 
         System.out.println("GoodsAction \t"+page2.getPageMap());
 

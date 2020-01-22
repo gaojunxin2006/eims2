@@ -78,12 +78,12 @@
 
                         parent.$('#win').window({
 
-                            title:'添加商品',
+                            title:'选择商品',
                             width:600,
                             height:400,
                             modal:true,
 
-                            <%--content:"<iframe src='${proPath}/base/goURL/supplier/add.action' title='添加供应商' height='100%' width='100%' frameborder='0px' ></iframe>"--%>
+                            content:"<iframe src='${proPath}/base/goURL/goods/select.do' title='选择商品' height='100%' width='100%' frameborder='0px' ></iframe>"
 
 
                         })
@@ -160,13 +160,14 @@
                 // {field:'productid',title:'Code',width:100},
                 // {field:'productname',title:'Name',width:100},
                 // {field:'unitcost',title:'Price',width:100,align:'right'}
-
-                {field:'supId',title:'供应商编号',width:100},
-                {field:'supName',title:'供应商名称',width:100},
-                {field:'supLinkman',title:'联系人',width:100},
-                {field:'supPhone',title:'电话',width:100},
-                {field:'supAddress',title:'地址',width:100},
-                {field:'supRemark',title:'供应商类型',width:100}
+                {field:'goodsId',title:'商品商编号',width:100},
+                {field:'goodsName',title:'商品名称',width:100},
+                {field:'goodsType',title:'类型',width:100},
+                {field:'goodsColor',title:'颜色',width:100},
+                {field:'goodsStore',title:'仓库',width:100},
+                {field:'goodsSelPrice',title:'价格',width:100},
+                {field:'goodsRemark',title:'备注',width:100},
+                {field:'createTimeString',title:'添加时间',width:100}
 
             ]]
         });

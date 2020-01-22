@@ -98,7 +98,7 @@
                 <li style="padding: 6px;"><a href="${proPath}/base/goURL/supplier/supplierlist.do" title="供应商管理"
                                              style="text-decoration: none;display: block;font-weight:bold;" onclick="">供应商管理</a>
                 </li>
-                <li style="padding: 6px;"><a href="${proPath}/base/goURL/goods/goodslist.action" title="商品管理"
+                <li style="padding: 6px;"><a href="${proPath}/base/goURL/goods/goodlist.do" title="商品管理"
                                              style="text-decoration: none;display: block;font-weight:bold;" >商品管理</a>
                 </li>
             </ul>
