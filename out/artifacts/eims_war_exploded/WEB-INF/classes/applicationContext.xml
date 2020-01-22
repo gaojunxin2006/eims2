@@ -16,17 +16,26 @@
 
 	
 	<!-- 配置数据源，记得去掉myBatis-config.xml的数据源相关配置 -->
+	<!--p6spy 慢sql -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
-		<property name="jdbcUrl" value="jdbc:mysql://192.168.0.242:3306/eims?useUnicode=true&amp;characterEncoding=UTF-8" />
-		<property name="user" value="wii" />
+				<property name="jdbcUrl" value="jdbc:mysql://192.168.0.242:3306/eims?useUnicode=true&amp;characterEncoding=UTF-8" />
+<!--		<property name="driverClass" value="com.p6spy.engine.spy.P6SpyDriver"/>-->
+
+<!--<property name="jdbcUrl" value="jdbc:p6spy:mysql://192.168.0.242:3306/eims?useUnicode=true&amp;characterEncoding=UTF-8"/>-->
+ 		<property name="user" value="wii" />
 		<property name="password" value="69658757" />
 	</bean>
 
 
 
+
+
+
 	<!-- 配置session工厂 org.mybatis.spring.SqlSessionFactoryBean ，
 	这个是用的mybatis整合spring。 如果使用MybatisPlus,修改这里 com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean-->
+
+	<!-- 如果使用MybatisPlus 配置 -->
 
 	<bean id="sqlSessionFactoryBean" class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
@@ -34,19 +43,86 @@
 
 		<!--配置扫描式加载SQL映射文件,记得去掉mybatis-config配置-->
 		<property name="mapperLocations" value="classpath:cn/linguo/*/*.xml"/>
+		<!-- 别名处理 -->
 		<property name="typeAliasesPackage" value="cn.linguo.entity"></property>
+
+		<!-- 注入全局配置 -->
+		<property name="globalConfig" ref="globalConfig"/>
+
+		<!-- 插件注册 -->
+		<property name="plugins">
+
+			<array>
+				<!-- 分页插件 -->
+				<bean id="paginationInterceptor" class="com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor"></bean>
+
+				<!-- 乐观锁插件 -->
+				<bean class="com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor"/>
+
+
+			</array>
+
+		</property>
+	</bean>
+
+
+
+	<!-- 定义mybatisPlus全局配置 -->
+	<bean id="globalConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig">
+
+		<property name="dbConfig" ref="dbConfig"></property>
+
+		<!-- 自动填充 -->
+		<property name="metaObjectHandler" ref="myMetaObjectHandler"/>
 
 	</bean>
 
 
 
-	
+	<bean id="dbConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig.DbConfig">
+
+		<!-- 主键自动生成 -->
+		<property name="idType" value="AUTO"></property>
+
+		<!-- 逻辑未删除,这些值对应数据库的字段 -->
+		<property name="logicNotDeleteValue" value="0"/>
+
+		<!-- 逻辑已删除 -->
+		<property name="logicDeleteValue" value="1"/>
+
+
+		<!-- 表前缀 -->
+<!--		<property name="tablePrefix" value=""></property>-->
+
+	</bean>
+
+
+
+
+
+
+
+	<!-- 配置 转换器，对于在basePackage设置的包（包括子包）下的接口类 的全类名，如果在Mapper.xml文件中定义过命名空间，
+将被转换成spring的BEAN，在调用 的地方通过@Autowired方式将可以注入接口实例-->
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+
+		<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"></property>
+		<property name="basePackage" value="cn.linguo.dao,cn.linguo.mapper"></property>
+
+	</bean>
+
+
+
+
+
 	<!-- 配置事务管理器,管理数据源事务处理-->
 	<bean id="tr" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 
 	</bean>
-
+	<!-- 基于注解的事务管理 -->
+	<tx:annotation-driven transaction-manager="tr"/>
 
 
 
@@ -70,7 +146,7 @@
 <!-- 	<aop:config>
 		<aop:advisor advice-ref="advice" pointcut="execution(* cn.itcast.scm.dao.impl.*.*(..))"/>
 	</aop:config> -->
-	
+
 	<!-- 把事务边界定在service层 -->
 	<aop:config>
 		<aop:advisor advice-ref="advice" pointcut="execution(* cn.linguo.service.impl.*.*(..))"/>
@@ -93,16 +169,6 @@
 
 
 	
-		<!-- 配置 转换器，对于在basePackage设置的包（包括子包）下的接口类 的全类名，如果在Mapper.xml文件中定义过命名空间，
-	将被转换成spring的BEAN，在调用 的地方通过@Autowired方式将可以注入接口实例-->
-
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-
-		<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"></property>
-		<property name="basePackage" value="cn.linguo.dao,cn.linguo.mapper"></property>
-
-	</bean>
-
 
 
 
@@ -122,11 +188,6 @@
 
 
 
-
-
-
-
-	<!-- 定义MybatisPlus的全局策略配置-->
 
 
 

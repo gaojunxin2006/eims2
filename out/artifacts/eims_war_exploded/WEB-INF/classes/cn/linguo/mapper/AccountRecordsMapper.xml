@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.linguo.mapper.AccountRecordsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.linguo.entity.AccountRecords">
+        <id column="ar_id" property="arId" />
+        <result column="sup_id" property="supId" />
+        <result column="ar_date" property="arDate" />
+        <result column="ar_order_id" property="arOrderId" />
+        <result column="ar_bus_type" property="arBusType" />
+        <result column="ar_payable" property="arPayable" />
+        <result column="ar_paid" property="arPaid" />
+        <result column="ar_arrears" property="arArrears" />
+        <result column="ar_discount" property="arDiscount" />
+        <result column="ar_attn" property="arAttn" />
+        <result column="ar_operator" property="arOperator" />
+        <result column="ar_remark" property="arRemark" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ar_id, sup_id, ar_date, ar_order_id, ar_bus_type, ar_payable, ar_paid, ar_arrears, ar_discount, ar_attn, ar_operator, ar_remark
+    </sql>
+
+</mapper>

@@ -49,12 +49,10 @@
 		<!-- 注入全局配置 -->
 		<property name="globalConfig" ref="globalConfig"/>
 
-
 		<!-- 插件注册 -->
 		<property name="plugins">
 
 			<array>
-
 				<!-- 分页插件 -->
 				<bean id="paginationInterceptor" class="com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor"></bean>
 
@@ -64,26 +62,18 @@
 
 			</array>
 
-
-
 		</property>
-
-
-
 	</bean>
 
 
 
-
 	<!-- 定义mybatisPlus全局配置 -->
-
 	<bean id="globalConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig">
 
 		<property name="dbConfig" ref="dbConfig"></property>
 
 		<!-- 自动填充 -->
 		<property name="metaObjectHandler" ref="myMetaObjectHandler"/>
-
 
 	</bean>
 
@@ -101,12 +91,11 @@
 		<property name="logicDeleteValue" value="1"/>
 
 
-
-
 		<!-- 表前缀 -->
 <!--		<property name="tablePrefix" value=""></property>-->
 
 	</bean>
+
 
 
 
@@ -122,9 +111,6 @@
 		<property name="basePackage" value="cn.linguo.dao,cn.linguo.mapper"></property>
 
 	</bean>
-
-
-
 
 
 
@@ -160,7 +146,7 @@
 <!-- 	<aop:config>
 		<aop:advisor advice-ref="advice" pointcut="execution(* cn.itcast.scm.dao.impl.*.*(..))"/>
 	</aop:config> -->
-	
+
 	<!-- 把事务边界定在service层 -->
 	<aop:config>
 		<aop:advisor advice-ref="advice" pointcut="execution(* cn.linguo.service.impl.*.*(..))"/>

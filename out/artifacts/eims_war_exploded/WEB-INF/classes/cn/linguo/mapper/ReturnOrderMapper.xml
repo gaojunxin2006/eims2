@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.linguo.mapper.ReturnOrderMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.linguo.entity.ReturnOrder">
+        <id column="ro_id" property="roId" />
+        <result column="sup_id" property="supId" />
+        <result column="sh_id" property="shId" />
+        <result column="ro_date" property="roDate" />
+        <result column="ro_payable" property="roPayable" />
+        <result column="ro_paid" property="roPaid" />
+        <result column="ro_remark" property="roRemark" />
+        <result column="ro_attn" property="roAttn" />
+        <result column="ro_operator" property="roOperator" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ro_id, sup_id, sh_id, ro_date, ro_payable, ro_paid, ro_remark, ro_attn, ro_operator
+    </sql>
+
+</mapper>

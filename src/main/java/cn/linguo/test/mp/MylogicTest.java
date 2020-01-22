@@ -29,7 +29,7 @@ public class MylogicTest {
 
     private MpService service  = ioc.getBean("mpService", MpService.class);
 
-    private MpMapper mapper=ioc.getBean("mpMapper",MpMapper.class);
+
 
 
 

@@ -2,12 +2,11 @@ package cn.linguo.entity;
 
 import java.math.BigDecimal;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.*;
 
-import com.baomidou.mybatisplus.annotation.TableName;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -28,8 +27,8 @@ public class Goods implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
-    @TableId(value = "goods_Id")
-    //type = IdType.AUTO 通过注解自增
+    @TableId(value = "goods_Id",type = IdType.ID_WORKER)
+    //type = IdType.AUTO 通过注解自增.IdType.ID_WORKER雪花算法
     private Integer goodsId;
 
 //    @TableField(value ="goods_name")
@@ -60,132 +59,30 @@ public class Goods implements Serializable {
     @TableField(exist = false)
     private double salary;
 
+    //创建时自动填充
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
 
 
-    public double getSalary() {
-        return salary;
-    }
-
-    public void setSalary(double salary) {
-        this.salary = salary;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public Integer getGoodsId() {
-        return goodsId;
-    }
-
-    public void setGoodsId(Integer goodsId) {
-        this.goodsId = goodsId;
-    }
-
-    public String getGoodsName() {
-        return goodsName;
-    }
-
-    public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName;
-    }
-
-    public String getGoodsUnit() {
-        return goodsUnit;
-    }
-
-    public void setGoodsUnit(String goodsUnit) {
-        this.goodsUnit = goodsUnit;
-    }
-
-    public String getGoodsType() {
-        return goodsType;
-    }
-
-    public void setGoodsType(String goodsType) {
-        this.goodsType = goodsType;
-    }
-
-    public String getGoodsColor() {
-        return goodsColor;
-    }
-
-    public void setGoodsColor(String goodsColor) {
-        this.goodsColor = goodsColor;
-    }
-
-    public Integer getGoodsStore() {
-        return goodsStore;
-    }
-
-    public void setGoodsStore(Integer goodsStore) {
-        this.goodsStore = goodsStore;
-    }
-
-    public Integer getGoodsLimit() {
-        return goodsLimit;
-    }
-
-    public void setGoodsLimit(Integer goodsLimit) {
-        this.goodsLimit = goodsLimit;
-    }
-
-    public BigDecimal getGoodsCommission() {
-        return goodsCommission;
-    }
-
-    public void setGoodsCommission(BigDecimal goodsCommission) {
-        this.goodsCommission = goodsCommission;
-    }
-
-    public String getGoodsProducer() {
-        return goodsProducer;
-    }
-
-    public void setGoodsProducer(String goodsProducer) {
-        this.goodsProducer = goodsProducer;
-    }
-
-    public String getGoodsRemark() {
-        return goodsRemark;
-    }
-
-    public void setGoodsRemark(String goodsRemark) {
-        this.goodsRemark = goodsRemark;
-    }
-
-    public BigDecimal getGoodsSelPrice() {
-        return goodsSelPrice;
-    }
-
-    public void setGoodsSelPrice(BigDecimal goodsSelPrice) {
-        this.goodsSelPrice = goodsSelPrice;
-    }
-
-    public BigDecimal getGoodsBuyPrice() {
-        return goodsBuyPrice;
-    }
-
-    public void setGoodsBuyPrice(BigDecimal goodsBuyPrice) {
-        this.goodsBuyPrice = goodsBuyPrice;
-    }
+    private Integer manager;
 
 
-    @Override
-    public String toString() {
-        return "Goods{" +
-                "goodsId='" + goodsId + '\'' +
-                ", goodsName='" + goodsName + '\'' +
-                ", goodsUnit='" + goodsUnit + '\'' +
-                ", goodsType='" + goodsType + '\'' +
-                ", goodsColor='" + goodsColor + '\'' +
-                ", goodsStore=" + goodsStore +
-                ", goodsLimit=" + goodsLimit +
-                ", goodsCommission=" + goodsCommission +
-                ", goodsProducer='" + goodsProducer + '\'' +
-                ", goodsRemark='" + goodsRemark + '\'' +
-                ", goodsSelPrice=" + goodsSelPrice +
-                ", goodsBuyPrice=" + goodsBuyPrice +
-                '}';
-    }
+
+    //版本控制。乐观锁
+    @Version
+    private Integer version;
+
+    @TableLogic()
+    //删除  版本 （0未删除，1已删除）
+    private Integer deleted;
+
+
+
+
+
+
+
+
+
+
 }

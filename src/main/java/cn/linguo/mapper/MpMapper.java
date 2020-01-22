@@ -46,4 +46,10 @@ public interface MpMapper extends BaseMapper<Mp> {
 
 
 
+    //加入sql注入器中自定义方法，这个方法名就是自定义的名字
+    //删除所有
+    int lg_deleteAll();
+
+
+
 }
