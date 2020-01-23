@@ -90,8 +90,9 @@
                                 goodsId:row.goodsId,
                                 goodsName:row.goodsName,
                                 goodsType:row.goodsType,
-                                goodsColor:row.goodsColor
-
+                                goodsColor:row.goodsColor,
+                                bodAmount:$('#bodAmount').val(),
+                                bodBuyPrice:$('#bodBuyPrice').val()
                             });
 
                             //关闭父窗体
@@ -193,8 +194,8 @@
 </table>
 
 <form action="">
-    数量：<input type="text" name=""><br>
-    价格:<input type="text" name=""><br>
+    数量：<input type="text" name="bodAmount" id="bodAmount"><br>
+    价格:<input type="text" name="bodBuyPrice" id="bodBuyPrice"><br>
     串号:<input type="text" name=""><br>
 
 

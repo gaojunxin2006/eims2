@@ -164,11 +164,10 @@
                 {field:'goodsName',title:'商品名称',width:100},
                 {field:'goodsType',title:'类型',width:100},
                 {field:'goodsColor',title:'颜色',width:100},
-                {field:'goodsStore',title:'仓库',width:100},
-                {field:'goodsSelPrice',title:'价格',width:100},
                 {field:'goodsRemark',title:'备注',width:100},
-                {field:'createTimeString',title:'添加时间',width:100}
-
+                {field:'createTimeString',title:'添加时间',width:100},
+                {field:'bodAmount',title:'仓库',width:100},
+                {field:'bodBuyPrice',title:'价格',width:100}
             ]]
         });
 
@@ -193,7 +192,28 @@
 
         });
 
+
+        //搜索框，点击弹出供应商搜索页面
+
+        $('#supName').searchbox({
+
+            searcher:function (value,name) {
+                parent.$('#win').window({
+
+                        title:'选择供应商',
+                        width:600,
+                        height: 400,
+                        modal: true,
+                        content:"<iframe src='${proPath}/base/goURL/supplier/select.action' title='选择供应商' height='100%' width='100%' frameborder='0px' ></iframe>"
+                })
+
+            },
+            prompt: '请选择供应商'
+
+
+        });
     });
+
 
 
 
@@ -215,10 +235,11 @@
 
 
 
-<form action="">
+<form action="" id="ff">
 
     请填写采购信息：<br>
-    供应商：<input type="text" id="supId" name="supId"/>
+    供应商：
+    <input type="text" id="supId" name="supId"/>
     <input type="text" id="supName" name="supName"/>
     仓库：<input type="text" id="shId" name="shId"/>
     日期：<input  type="text" id="boDate"
